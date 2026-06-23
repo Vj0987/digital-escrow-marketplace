@@ -1,0 +1,33 @@
+# Maven
+**/target/
+
+# Eclipse / STS
+**/.classpath
+**/.project
+**/.settings/
+**/.apt_generated
+**/.springBeans
+**/.sts4-cache
+
+# IntelliJ
+**/.idea/
+**/*.iml
+**/*.ipr
+**/*.iws
+
+# VS Code
+**/.vscode/
+
+# Logs
+**/*.log
+
+# Sensitive Files
+**/src/main/resources/application.properties
+**/src/main/resources/application.yml
+
+# Eclipse Workspace
+.metadata/
+
+# OS Files
+.DS_Store
+Thumbs.db
