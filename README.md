@@ -131,9 +131,9 @@ This project is being developed to gain hands-on experience with:
 
 ## Author
 
-Vinit Joshi
-Sahil Nigam
-Aditya Sonawane
+Vinit Joshi |
+Sahil Nigam |
+Aditya Sonawane |
 Rahul Kumar Pal
 
 Java Backend Developer | Spring Boot | Microservices | REST APIs
