@@ -21,19 +21,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfigurator {
 
+	private final UserDetailImpl userDetailImpl;
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public UserDetailsService userDetailService() {
-		return new UserDetailImpl();
+	public SecurityConfigurator(UserDetailImpl userDetailImpl) {
+		this.userDetailImpl = userDetailImpl;
 	}
 
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailService());
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailImpl);
 		provider.setPasswordEncoder(passwordEncoder());
 		return provider;
 	}
@@ -51,12 +52,18 @@ public class SecurityConfigurator {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()) // essential for REST api invocation
-				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/users/authenticate/**").authenticated().anyRequest().permitAll())
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+						.requestMatchers("/users/register/**", "/users/login", "/users/forgot-password",
+								"/users/change-password")
+						.permitAll()
+
+						.anyRequest().authenticated())
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.httpBasic(Customizer.withDefaults());
 		http.authenticationProvider(authenticationProvider());
-		JwtFilter jwtFilter = new JwtFilter(jwtUtil(), userDetailService());
+		JwtFilter jwtFilter = new JwtFilter(jwtUtil(),userDetailImpl);
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}

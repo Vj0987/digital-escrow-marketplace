@@ -1,7 +1,12 @@
 package org.cdac.digital_escrow_marketplace.users.entity;
 
+import org.cdac.digital_escrow_marketplace.users.enums.Role;
+import org.cdac.digital_escrow_marketplace.users.enums.UserStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
@@ -20,16 +25,18 @@ public class Users {
 	private String email;
 
 	@Column(name = "phone_no")
-	private long phoneNo;
+	private String phoneNo;
 
 	@Column(name = "password")
 	private String password;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
-	private String role;
+	private Role role;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "account_status")
-	private String accountStatus;
+	private UserStatus accountStatus;
 
 	public int getUserId() {
 		return userId;
@@ -55,11 +62,11 @@ public class Users {
 		this.email = email;
 	}
 
-	public long getPhoneNo() {
+	public String getPhoneNo() {
 		return phoneNo;
 	}
 
-	public void setPhoneNo(long phoneNo) {
+	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 
@@ -71,19 +78,19 @@ public class Users {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
-	public String getAccountStatus() {
+	public UserStatus getAccountStatus() {
 		return accountStatus;
 	}
 
-	public void setAccountStatus(String accountStatus) {
+	public void setAccountStatus(UserStatus accountStatus) {
 		this.accountStatus = accountStatus;
 	}
 
