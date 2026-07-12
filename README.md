@@ -1,139 +1,245 @@
 # Digital Escrow Marketplace
 
-A microservices-based Digital Escrow Marketplace that enables secure transactions between clients and service providers. The platform holds payments in escrow and releases funds only after successful completion and approval of services.
+A **microservices-based Digital Escrow Marketplace** that enables secure transactions between clients and service providers. The platform securely holds client payments in escrow and releases funds only after successful completion and approval of the requested services.
 
-## Architecture
+This project is designed following enterprise-level microservices architecture using **Spring Boot**, **Spring Cloud**, **Spring Security**, and **JWT Authentication**.
 
-Current Microservices:
+---
 
-* Eureka Discovery Server
-* API Gateway
-* User Service
+# Architecture
 
-Future Microservices:
+## Current Microservices
 
-* Service Catalog Service
-* Order Service
+* **Eureka Discovery Server** – Service Registry
+* **API Gateway** – Centralized Routing & Authentication
+* **User Service** – User Management & Authentication
+* **Services Service** – Service Catalog Management
+* **Booking Service** – Service Booking Management
+
+---
+
+# Planned Microservices
+
 * Escrow Service
 * Payment Service
 * Notification Service
+* Review & Rating Service
+* Admin Service
 
-## Tech Stack
+---
 
-### Backend
+# Tech Stack
+
+## Backend
 
 * Java 17
 * Spring Boot
 * Spring Security
-* JWT Authentication
 * Spring Data JPA
 * Hibernate
+* JWT Authentication
+* Bean Validation
+* OpenAPI (Swagger)
 
-### Microservices
+## Microservices
 
-* Eureka Service Discovery
 * Spring Cloud Gateway
+* Eureka Service Discovery
 * REST APIs
 
-### Database
+## Database
 
 * MySQL
 
-### Build Tool
+## Build Tool
 
 * Maven
 
-## Implemented Features
+---
 
-### User Service
+# Implemented Features
+
+## User Service
 
 * User Registration
-* User Authentication
+* User Login
 * JWT Token Generation
-* Get User By ID
-* Get User By Email
+* Role-Based Authentication
+* Forgot Password using OTP
+* OTP Verification
+* Password Reset
+* Update User Profile
+* Get User by ID
+* Get User by Email
 * Get All Users
+* Global Exception Handling
+* Swagger API Documentation
 
-### Security
+---
+
+## Services Service
+
+* Create Service
+* Update Service
+* Delete Service (Soft Delete)
+* Get Service by ID
+* Get All Active Services
+* Get Services by Provider
+* Category Validation
+* Provider Authorization
+* Swagger API Documentation
+
+---
+
+## Booking Service
+
+* Create Booking
+* Booking Validation
+* Booking Status Management
+* Service Availability Validation
+* Booking APIs
+* Swagger API Documentation
+
+---
+
+# Security Features
 
 * Spring Security Integration
-* JWT Based Authentication
+* JWT-Based Authentication
 * Stateless Session Management
+* Password Encryption using BCrypt
+* Role-Based Authorization
+* Protected REST APIs
 
-### Microservices Infrastructure
+---
 
-* Eureka Server Configuration
-* API Gateway Configuration
-* Service Registration and Discovery
+# Microservices Infrastructure
 
-## Project Structure
+* Eureka Discovery Server
+* API Gateway
+* Service Registration & Discovery
+* Centralized Routing
+* Inter-Service Communication Ready
 
+---
+
+# Project Structure
+
+```text
 digital-escrow-marketplace/
+│
+├── cloud/
+│   ├── eureka/
+│   └── api-gateway/
+│
+├── users/
+│
+├── services/
+│
+└── booking-service/
+```
 
-├── cloud/                 # Eureka Discovery Server
+---
 
-├── api-gateway/           # API Gateway
+# REST APIs
 
-└── users/                 # User Service
+## User Service
 
-## APIs Implemented
+| Method | Endpoint                     |
+| ------ | ---------------------------- |
+| POST   | `/users/register`            |
+| POST   | `/users/login`               |
+| POST   | `/users/forgotPassword`      |
+| POST   | `/users/verifyOtp`           |
+| POST   | `/users/resetPassword`       |
+| PUT    | `/users/updateProfile`       |
+| GET    | `/users/userById/{id}`       |
+| GET    | `/users/userByEmail/{email}` |
+| GET    | `/users/getAllUsers`         |
 
-### User APIs
+---
 
-POST /users/register
+## Services Service
 
-POST /users/getToken
+| Method | Endpoint                                       |
+| ------ | ---------------------------------------------- |
+| POST   | `/services/create_services`                    |
+| PUT    | `/services/update_services`                    |
+| DELETE | `/services/delete_service/{serviceId}`         |
+| GET    | `/services/getServiceById/{serviceId}`         |
+| GET    | `/services/getAllActiveServices`               |
+| GET    | `/services/getServicesByProvider/{providerId}` |
 
-GET /users/authenticate/userById/{id}
+---
 
-GET /users/authenticate/userByEmail/{email}
+## Booking Service
 
-GET /users/authenticate/allUsers
+| Method | Endpoint                                      |
+| ------ | --------------------------------------------- |
+| POST   | `/booking/createBooking`                      |
+| GET    | `/booking/getBookingById/{bookingId}`         |
+| GET    | `/booking/getBookingsByClient/{clientId}`     |
+| GET    | `/booking/getBookingsByProvider/{providerId}` |
+| PUT    | `/booking/updateBookingStatus/{bookingId}`    |
 
-## Future Enhancements
+---
 
-### Service Catalog Service
+# API Documentation
 
-* Service Creation
-* Service Categories
-* Service Search
+Swagger UI is available for each microservice.
 
-### Escrow Management
+```
+http://localhost:<PORT>/swagger-ui/index.html
+```
 
-* Create Escrow Transactions
-* Hold Payments
-* Release Payments
-* Refund Handling
+Replace `<PORT>` with the respective service port.
 
-### Notifications
+---
 
+# Future Enhancements
+
+* Escrow Wallet Management
+* Payment Gateway Integration
+* Milestone-Based Payments
+* Refund Management
 * Email Notifications
-* Payment Updates
-* Service Status Updates
+* SMS Notifications
+* RabbitMQ Event-Driven Communication
+* Distributed Logging
+* Docker & Docker Compose
+* Oracle Cloud Deployment
+* CI/CD Pipeline using GitHub Actions
+* Monitoring with Spring Boot Actuator
 
-### Messaging
+---
 
-* RabbitMQ Integration
-* Event-Driven Communication
-
-## Learning Objectives
+# Learning Objectives
 
 This project is being developed to gain hands-on experience with:
 
-* Microservices Architecture
+* Enterprise Microservices Architecture
+* Spring Boot
 * Spring Security
 * JWT Authentication
-* Service Discovery
 * API Gateway
+* Eureka Service Discovery
 * Distributed Systems
+* REST API Design
 * Secure Payment Workflows
-* Enterprise Java Development
+* Clean Architecture
+* Production-Ready Backend Development
 
-## Author
+---
 
-Vinit Joshi |
-Sahil Nigam |
-Aditya Sonawane |
-Rahul Kumar Pal
+# Contributors
 
-Java Backend Developer | Spring Boot | Microservices | REST APIs
+* **Vinit Joshi**
+* **Sahil Nigam**
+* **Aditya Sonawane**
+* **Rahul Kumar Pal**
+
+---
+
+# License
+
+This project is developed for educational purposes as part of the **CDAC PG-DAC Final Project**.
