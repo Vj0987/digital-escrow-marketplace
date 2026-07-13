@@ -21,10 +21,6 @@
 # Logs
 **/*.log
 
-# Sensitive Files
-**/src/main/resources/application.properties
-**/src/main/resources/application.yml
-
 # Eclipse Workspace
 .metadata/
 
